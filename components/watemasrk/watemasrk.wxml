@@ -1,0 +1,3 @@
+<view class="water_top" style="pointer-events: none;">
+  <view class="water-text" wx:for="{{30}}" style="{{'width: calc(100% / ' + num}}">{{watermarkText}}</view>
+</view>

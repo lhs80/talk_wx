@@ -1,0 +1,451 @@
+page {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.meeting {
+  width: 100vw;
+  height: calc(100vh - env(safe-area-inset-bottom));
+  background-color: #F2F3F5;
+}
+
+.navTitle {
+  width: 100%;
+  height: 48px !important;
+  padding-top: 40px !important;
+  background-color: #FAFAFA !important;
+}
+
+.endMeeting {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.videoSwiper {
+  width: calc(100% - 32px);
+  /* height: calc(100% - 10vh - 98rpx); */
+  height: calc(100% - 88px - 49px - 24px);
+  margin: 10px 16px 8px 16px;
+}
+
+.homeScreen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background:black;
+  z-index:11;
+}
+
+.emceeName {
+  display: block;
+  position: absolute;
+  max-width: auto;
+  max-width: 200rpx;
+  min-width: 104rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  bottom: 0;
+  margin: 0 0 12rpx 12rpx;
+  font-size: 22rpx;
+  padding: 5rpx;
+  background-color: #3A5579;
+}
+
+.emceeLoading {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #F5E3D2;
+}
+
+.emceeLoadingText {
+  width: 100%;
+  display: block;
+  text-align: center;
+  position: absolute;
+  /* z-index: 26; */
+  top: 84%;
+  color: #051C33;
+  font-size: 28rpx;
+}
+
+.viceScreen {
+  position: absolute;
+  top: 36rpx;
+  right: 20rpx;
+  width: 200rpx;
+  height: 300rpx;
+  box-shadow: 0px 0px 2px 0px rgba(230, 230, 230, 0.5);
+  border-radius: 6px;
+  z-index: 11;
+}
+.viceScreen .userName{
+   position: absolute;
+   display: block;
+   bottom: 0;
+   max-width: 120rpx;
+   min-width: 104rpx;
+   height: 30rpx;
+   background-color: #e3dfe2cc;
+   border-radius: 10rpx;
+   text-align: center;
+   font-size: 22rpx;
+   padding: 5rpx;
+   margin: 0 0 8rpx 6rpx;
+}
+
+.userName {
+  display: block;
+  /* position: absolute; */
+  bottom: 0;
+  max-width: 120rpx;
+  min-width: 104rpx;
+  height: 30rpx;
+  background-color: #e3dfe2cc;
+  border-radius: 10rpx;
+  text-align: center;
+  font-size: 22rpx;
+  padding: 5rpx;
+  margin: 0 0 8rpx 6rpx;
+}
+
+.otherScreen {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+}
+
+.otherScreenList {
+  width: calc(50% - 4px);
+  height: calc(50% - 4px);
+}
+
+.otherScreenList:nth-child(2),
+.otherScreenList:nth-child(4) {
+  margin-left: 8px;
+}
+
+.otherScreenList:nth-child(3),
+.otherScreenList:nth-child(4) {
+  margin-top: 8px;
+}
+
+.otherUserList {
+  display: flex; 
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background:black;
+}
+
+.menuList {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 98rpx;
+  padding-bottom: 10rpx;
+  background-color: #FFF;
+}
+
+.menuItem {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-wrap: wrap;
+  color: #2E3033;
+}
+
+.icon-liaotian {
+  position: relative;
+}
+
+.chatNum {
+  position: absolute;
+  width: 28rpx;
+  height: 28rpx;
+  font-size: 20rpx;
+  font-family: DINAlternate-Bold, DINAlternate;
+  font-weight: bold;
+  color: #FFFFFF;
+  line-height: 28rpx;
+  text-align: center;
+  left: 44rpx;
+  border-radius: 50%;
+  background-color: #E62C12;
+}
+
+.menuItem>.iconfont {
+  display: block;
+  font-size: 68rpx;
+}
+
+.menuItem>text {
+  display: block;
+  width: 100%;
+  font-size: 20rpx;
+}
+
+.hoverTip {
+  position: absolute;
+  width: 400rpx;
+  /* height: 108rpx; */
+  bottom: calc(100% + 20rpx);
+  border-radius: 10rpx;
+  z-index: 9;
+  background-color: rgba(51, 51, 51, 0.8);
+}
+
+/* .hoverTip::after {
+  position: absolute;
+  content: ' ';
+  left: calc(50% - 15rpx);
+  bottom: calc(0 - 20rpx);
+  border-width: 15rpx;
+  border-style: solid;
+  border-color: rgba(51, 51, 51, 0.8) transparent transparent transparent;
+} */
+
+.closeMsg {
+  width: 24rpx;
+  height: 24rpx;
+  margin: 2px 4px 0 0;
+  color: #CCCCCC;
+}
+
+.more {
+  position: absolute;
+  bottom: 100%;
+  width: 100%;
+  height: 240rpx;
+  z-index: 8;
+  border-radius: 10px 10px 0px 0px;
+  background-color: rgb(255, 255, 255);
+}
+
+.moreList {
+  display: flex;
+  margin-top: 40rpx;
+}
+
+.moreList>view>image {
+  width: 68rpx;
+  height: 68rpx;
+  padding-bottom: 14rpx;
+}
+
+.chatBody {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* height: 1204rpx; */
+  height: 70%;
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.97);
+  box-shadow: 0px 0px 4px 0px rgba(213, 213, 213, 0.8);
+  border-radius: 10px 10px 0px 0px;
+}
+
+.chatBodyTitle {
+  height: 68rpx;
+}
+
+.chatMsgBody {
+  /* display: flex;
+  justify-content: center;
+  flex-wrap: wrap; */
+  width: 700rpx;
+  margin: 0 auto;
+  height: calc(100% - env(safe-area-inset-bottom) - 108rpx * 2);
+  overflow-y: auto;
+}
+
+.moreTitle>text {
+  display: block;
+  padding: 16rpx 0 0 22rpx;
+}
+
+.moreTitle>view {
+  padding: 16rpx 32rpx 0 0;
+}
+
+.moreTitle>view>.icon-quxiao {
+  font-size: 52rpx;
+}
+
+.moreTitle {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  /* padding: 20rpx; */
+  font-size: 13px;
+  font-weight: 500;
+  color: #2E3033;
+}
+
+.headUserName {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60rpx;
+  height: 60rpx;
+  margin: 22rpx 0 22rpx 16rpx;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 500;
+  color: #FFFFFF;
+  background-color: #FF9B50;
+}
+
+.msgUserName {
+  display: block;
+  margin-top: 20rpx;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(216, 216, 216, 0.9);
+}
+
+.sendUserName {
+  color: #000000;
+}
+
+.msgContent {
+  font-size: 24rpx;
+  font-weight: 400;
+  color: #FFFFFF;
+
+}
+
+.otherMsg,
+.meSendMsg {
+  display: flex;
+}
+
+.content {
+  min-width: auto;
+  max-width: 80%;
+  height: auto;
+}
+
+.meSendMsg {
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.meSendMsgContent {
+  min-width: auto;
+  max-width: 80%;
+  height: auto;
+  padding: 10rpx;
+  color: #000000 !important;
+  background-color: #F4F7FC;
+}
+
+.chatContent {
+  /* display: flex; */
+  max-width: 90%;
+  min-width: auto;
+  height: auto;
+  padding: 10rpx;
+  border-radius: 2px;
+  color: #000000 !important;
+  background-color: #F4F7FC;
+}
+
+.sendMsg {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 68rpx;
+  padding: 20rpx 0 20rpx 0;
+}
+
+.sendMsg>input {
+  width: 716rpx;
+  height: 68rpx;
+  border-radius: 4px;
+  border: 1px solid #F2F2F2;
+}
+
+/* 选中大小 */
+.activeScreen {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: bisque;
+}
+
+.live_push,
+.live_pull {
+  flex:1;
+  width: 100%;
+  height: 100%;
+}
+
+.sign-name {
+  width: 100%;
+  height: 100%;
+}
+
+.userNameBg {
+  background-color: #3093F4 !important;
+}
+
+/* 主副屏幕切换 */
+/* .exchangeHomeScreen{
+  position: absolute;
+  top: 10rpx;
+  right: 10rpx;
+  width: 100rpx;
+  height: 150rpx;
+  background-color: blue;
+  z-index: 5;
+} */
+
+.activeUser {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  right: 0;
+}
+
+.startRecord {
+  position: absolute;
+  top: 125px;
+  left: 31px;
+  width: 68px;
+  height: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(51, 51, 51, 0.5);
+  border-radius: 1px;
+  z-index: 99;
+}
+
+.startRecord>image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 12rpx;
+}
+
+.startRecord>text {
+  font-size: 10px;
+  font-family: SourceHanSansCN-Regular, SourceHanSansCN;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 15px;
+  margin-right: 12rpx;
+}

@@ -1,0 +1,166 @@
+/* 签名 */
+.noteCheck{
+  position: absolute;
+  top: 0;
+  /* left: 20%;
+  right: 20%; */
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 999;
+  background-color: #000000;
+}
+.noteCheckWordImgBox{
+  height: auto;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.noteCheckWordImg{
+  width: 100%;
+  height: auto;
+  border-bottom: 4rpx solid rgb(128, 128, 128);
+}
+.singlePageBox{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+}
+.singlePage{
+  display: block;
+  width: 95% !important;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.16);
+}
+.noteCheckBtnList{
+  position: fixed;
+  bottom: 50rpx;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: transparent;
+}
+.noteCheckBtn{
+  width: 330rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  color: #FFF;
+  font-size: 28rpx;
+  background-color: #226EED;
+}
+.noteCheckCancelBtn{
+  color: #FFF;
+  background-color: #CCCCCC;
+}
+/* 签名 */
+.signatureBox{
+  position: absolute;
+  top: 0;
+  /* left: 20%;
+  right: 20%; */
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 999;
+  background-color: #FFFFFF;
+}
+
+.signature {
+  width: 100vw;
+  height: 100vh;
+  background: #ffffff;
+  overflow: hidden;
+}
+.mycanvas {
+  width: 100vw;
+  height: 80vh;
+  /* background: #fff; */
+  position: relative;
+  z-index: 9;
+  background-color: transparent;
+  /* border-bottom: 2rpx solid #EEE; */
+  /* border: 1px solid black; */
+}
+.canvas {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.signatureTitle{
+  width: 100%;
+  /* height: 5vh; */
+  margin-top: 100rpx;
+  text-align: center;
+  font-size: 22rpx;
+  font-weight: 500;
+  color: #333333;
+}
+.explain{
+  position: absolute;
+  width: 95vw;
+  height: 35vh;
+  line-height: 35vh;
+  top: 12vh;
+  opacity: 0.3;
+  text-align: center;
+  border: 1px dotted rgb(150, 150, 150);
+  font-size: 28rpx;
+}
+.date{
+  top: 50vh;
+  height: 28vh;
+  line-height: 28vh;
+  border: 1px dotted rgb(150, 150, 150);
+}
+.signatureMenu{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 10vh;
+  /* margin-bottom: 84rpx; */
+  /* border: 1px solid red; */
+  /* padding: 10rpx; */
+}
+.signatureMenu_icon{
+  width: 70%;
+}
+.signatureMenu_icon,.signatureBtn{
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  /* border: 1px solid red; */
+}
+.icon{
+  width: 66rpx;
+  height: 66rpx;
+  margin: 10rpx;
+}
+.signatureBtn{
+  width: 80%;
+}
+.signatureSubmitBtn{
+  width: 200rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  background-color: rgb(22, 150, 255);
+  font-size: 28rpx;
+  color: #fff;
+  margin: 10rpx;
+  font-weight: 500;
+}
+.signNameCancel{
+  width: 144rpx;
+  background-color: rgb(167, 167, 167) !important;
+}
+.disabledText{
+  color:#666666
+}
+

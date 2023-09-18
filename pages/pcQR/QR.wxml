@@ -1,0 +1,24 @@
+<view class="QR">
+  <view class="QR-box">
+    <view class="QR-logo-box">
+      <image class="QR-logo" src="../../images/QR-logo.png" />
+    </view>
+    <view wx:if="{{verifyStatus}}">
+      <image class="QR-img" src="{{qrcodeURL}}" />z
+      <view class="text">
+        请用
+        <text class="weixin-text">手机微信</text>
+        扫描二维码，人脸识别通过后进入云视庭
+      </view>
+    </view>
+    <view wx:else>
+      <image wx:if="{{faceVerifyStatus}}" class="QR-success" src="../../images/face-success.png" />
+      <image wx:else class="QR-success" src="../../images/face-error.png" />
+      <text class="verify-info">{{ faceVerifyStatus ? '验证通过' : '验证失败'}}</text>
+      <view class="text">
+        <button wx:if="{{faceVerifyStatus}}" bindtap="onSubmit">进入</button>
+        <button wx:else>重试</button>
+      </view>
+    </view>
+  </view>
+</view>

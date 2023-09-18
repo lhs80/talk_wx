@@ -1,0 +1,223 @@
+@import '../../icon/iconfont.wxss';
+.sign-dialog{
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  width: 60%;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 999;
+  background-color: #FFFFFF;
+}
+.record-image-list{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.record-image-item{
+  display: block;
+  width: 100%;
+}
+.record-image-item:not(:first-child){
+  border-top: 5rpx solid rgb(128, 128, 128);
+}
+.record-btn-sign{
+  position: fixed;
+  bottom: 6rpx;
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  background-color: transparent;
+}
+.record-btn-sign button{
+  width: 40%;
+  height: auto;
+  color: #FFF;
+  background-color: #148AFE;
+  border-radius: 2px;
+  border:none;
+}
+.noteCheckCancelBtn{
+  color: #051C33;
+  border: 1px solid #051C33;
+  background-color: #FFF;
+}
+
+/* 签名 */
+.signatureBox{
+  position: absolute;
+  top: 0;
+  /* left: 20%;
+  right: 20%; */
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 999;
+  background-color: #FFFFFF;
+}
+
+.signature {
+  width: 100vw;
+  height: 100vh;
+  background: #ffffff;
+  overflow: hidden;
+}
+.mycanvas {
+  width: 100vw;
+  height: 80vh;
+  /* background: #fff; */
+  position: relative;
+  border-bottom: 2rpx solid #EEE;
+  z-index: 9;
+  background-color: transparent;
+  /* border: 1px solid black; */
+}
+.canvas {
+  width: 100%;
+  height: 85vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.signatureTitle{
+  width: 100%;
+  height: 5vh;
+  text-align: center;
+  font-size: 14rpx;
+  padding: 5rpx;
+  border-bottom: 2rpx solid #EEE;
+}
+.explain{
+  position: absolute;
+  width: 95vw;
+  height: 35vh;
+  line-height: 35vh;
+  top: 12vh;
+  opacity: 0.3;
+  text-align: center;
+  border: 1px dotted rgb(150, 150, 150);
+  font-size: 14rpx;
+}
+
+
+/* 二维码 */
+.qrcode-wrapper {
+  width: 453px;
+  height: 351px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 111;
+  text-align: right;
+}
+
+.qrcode-wrapper .icon-quxiao {
+  display: block;
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  font-size: 24rpx;
+  cursor: pointer;
+}
+
+.qrcode-wrapper > image {
+  display: block;
+  width: 220px;
+  height: 220px;
+  margin-top: 25px;
+}
+
+.qrcode-wrapper > text {
+  display: block;
+  height: 24px;
+  font-size: 24px;
+  font-weight: 500;
+  color: #051C33;
+  margin-bottom: 20px;
+  text-align: center;
+}
+@media screen and (max-width: 972px) and (min-width: 587px) {
+  .explain{
+    width: 75vw;
+  }
+}
+@media screen and (min-width: 973px) {
+  .explain{
+    width: 75vw;
+  }
+}
+.date{
+  top: 50vh;
+  height: 28vh;
+  line-height: 28vh;
+  border: 1px dotted rgb(150, 150, 150);
+}
+.signatureMenu{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 15vh;
+  margin-top: 8rpx;
+  /* border: 1px solid red; */
+  /* padding: 10rpx; */
+}
+.signatureMenu_icon{
+  width: 60%;
+}
+.signatureMenu_icon,.signatureBtn{
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  /* border: 1px solid red; */
+}
+.icon{
+  width: 26rpx;
+  height: 26rpx;
+  margin: 10rpx;
+}
+.signatureBtn{
+  width: 40%;
+}
+.signatureSubmitBtn{
+  width: 40%;
+  height: 30rpx;
+  line-height: 30rpx;
+  background-color: rgb(22, 150, 255);
+  font-size: 16rpx;
+  color: #fff;
+}
+.signNameCancel{
+  background-color: rgb(167, 167, 167) !important;
+}
+.water-mark{
+  position: fixed;
+  top:0;
+  bottom: 0;
+  left: 20%;
+  right: 20%;
+  width: 60%;
+  height: 100%;
+  z-index: 9999;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.water-text{
+  width: calc(100% / 2);
+  color: rgba(169,169,169,.2);
+  text-align: center;
+  font-size: 95%;
+  transform:rotate(-40deg);
+  margin: 30rpx 0;
+}

@@ -1,0 +1,209 @@
+<view class="meeting-container {{platform==='windows'?'computer':''}}">
+    <!--视频-->
+    <view class="screen-panel">
+        <!-- 主持人视频流 -->
+        <view class="homeScreen {{homeScreenId===hostInfo.resourceId?'active':''}}" wx:if="{{!mineInfo.groupId && meetingInfo.started}}"
+              bindtap="setFullScreen" data-resourceId="{{hostInfo.resourceId}}">
+            <live-player src="{{hostInfo.outRtmpUrl}}"
+                         mode="RTC"
+                         object-fit="contain"
+                         sound-mode="{{soundMode}}"
+                         autoplay="true"
+                         binderror="error2"
+                         bindstatechange="playerStateChange"
+                         data-userInfo="{{hostInfo}}"
+                         wx:if="{{hostInfo.userId!==mineInfo.userId}}"
+            />
+            <live-pusher
+                    url="{{mineInfo.outRtmpUrl + '?caller_id=' + item.resourceId + '&playId=' + meetingInfo.meetingId + '-' + mineInfo.winIndex + '-' + 'push'}}"
+                    mode="RTC"
+                    object-fit="contain"
+                    aspect='3:4'
+                    autopush
+                    enable-mic="{{mineInfo.micStatus}}"
+                    bindstatechange="pusherStateChange"
+                    bindnetstatus="pusherNetStatus"
+                    binderror="pusherError"
+                    waiting-image="../../images/wait-image.png"
+                    id="pusher"
+                    wx:else
+            />
+            <text class="name">{{hostInfo.alias}}</text>
+        </view>
+        <!-- 被禁听后的提示 -->
+        <view class="homeScreen" wx:if="{{mineInfo.groupId && meetingInfo.started}}">
+            <image mode="aspectFill" src="../../images/private_chat_loading.png"/>
+            <text class="black-house-tip">稍后法官将与您谈话，请耐心等待…</text>
+        </view>
+        <!-- 会议未开始时的提示 -->
+        <view class="homeScreen" wx:if="{{!meetingInfo.started}}">
+            <image mode="aspectFill" src="../../images/private_chat_loading.png"/>
+            <text class="black-house-tip">等待会议开始</text>
+        </view>
+        <!-- 右侧参会人列表 -->
+        <!-- -webkit-overflow-scrolling：touch是为了解决低版本IOS上不能滑动的问题-->
+        <!-- -webkit-overflow-scrolling：auto是为了解决高版本IOS上右侧参会人窗口不能放大的问题-->
+        <view class="attend-list" style="-webkit-overflow-scrolling: {{homeScreenId===-1?'touch':'auto'}}">
+            <!--推送当前用户的流-->
+            <view class="attend-item {{homeScreenId===mineInfo.resourceId?'active':''}}"
+                  bindtap="setFullScreen"
+                  data-resourceId="{{mineInfo.resourceId}}"
+                  wx:if="{{!meetingInfo.started||hostInfo.resourceId!==mineInfo.resourceId}}"
+            >
+                <live-pusher
+                        url="{{mineInfo.outRtmpUrl + '?caller_id=' + item.resourceId + '&playId=' + meetingInfo.meetingId + '-' + mineInfo.winIndex + '-' + 'push'}}"
+                        mode="RTC"
+                        object-fit="contain"
+                        aspect='3:4'
+                        autopush
+                        enable-mic="{{mineInfo.micStatus}}"
+                        bindstatechange="pusherStateChange"
+                        bindnetstatus="pusherNetStatus"
+                        binderror="pusherError"
+                        waiting-image="../../images/wait-image.png"
+                        id="pusher"
+                />
+                <text class="name">{{mineInfo.alias}}</text>
+            </view>
+            <!--拉取其他参会人的视频流-->
+            <block wx:for="{{attendList}}" wx:id="userId" wx:key="index">
+                <!--只渲染，不是主持人，不是当前用户，和当前用户在同一分组的参会人-->
+                <view class="attend-item {{homeScreenId===item.resourceId?'active':''}}"
+                      bindtap="setFullScreen"
+                      data-resourceId="{{item.resourceId}}"
+                      wx:if="{{hostInfo.resourceId!==item.resourceId&&mineInfo.resourceId!==item.resourceId&&mineInfo.groupId===item.groupId}}"
+                >
+                    <live-player src="{{item.outRtmpUrl}}"
+                                 mode="RTC"
+                                 object-fit="contain"
+                                 sound-mode="{{soundMode}}"
+                                 autoplay
+                                 binderror="playerError"
+                                 bindnetstatus="playerNetStatus"
+                                 bindstatechange="playerStateChange"
+                                 data-userInfo="{{item}}"
+                                 wx:if="{{item.userId !== userId}}"
+                    />
+                    <text class="name">{{item.alias}}</text>
+                </view>
+            </block>
+        </view>
+    </view>
+    <!--菜单栏-->
+    <view class="menu-bar">
+        <view class="menu-item" bindtap="openChatDialog">
+            <i class="iconfont icon-liaotian"/>
+            <i class="chatNum" wx:if="{{chatInfo.newMessageNumber > 0}}">{{chatInfo.newMessageNumber}}</i>
+            <text class="volume_title">文字交谈</text>
+        </view>
+        <view class="menu-item" bindtap="voiceBtn" wx:if="{{voiceShow && menuStatus}}">
+            <i class="iconfont icon-yangshengqi"/>
+            <text>切换听筒</text>
+        </view>
+        <view class="menu-item" bindtap="voiceBtn" wx:if="{{!voiceShow && menuStatus}}">
+            <i class="iconfont icon-tingtong"/>
+            <text>切换扬声器</text>
+        </view>
+        <view class="menu-item" bindtap="cameraBtn" wx:if="{{mineInfo.cameraType && menuStatus}}">
+            <i class="iconfont icon-zhaoxiangji1"/>
+            <text>反转摄像头</text>
+        </view>
+        <view class="menu-item" wx:if="{{!mineInfo.cameraType && menuStatus}}">
+            <i class="iconfont icon-zhaoxiangji1 disabledText"/>
+            <text class="disabledText">反转摄像头</text>
+        </view>
+        <view class="menu-item" bindtap="uploadImg" wx:if="{{meetingInfo.upLoadFile}}">
+<!--        <view class="menu-item" bindtap="showChooseFileMenu">-->
+            <i class="iconfont icon-shangchuanwenjian"/>
+            <text>上传材料</text>
+        </view>
+        <view class="menu-item" wx:else>
+            <i class="iconfont icon-shangchuanwenjian disabledText"/>
+            <text class="disabledText">上传材料</text>
+        </view>
+        <view class="menu-item" bindtap="getNote" wx:if="{{isGetNote}}">
+            <i class="iconfont icon-tanhuabilu"/>
+            <text>笔录签名</text>
+        </view>
+        <view class="menu-item" wx:else>
+            <i class="iconfont icon-tanhuabilu disabledText"/>
+            <text class="disabledText">笔录签名</text>
+        </view>
+        <view class="menu-item" bindtap="toggleMicStatus">
+            <i class="iconfont icon-maikefeng1" wx:if="{{mineInfo.micStatus}}"/>
+            <i class="iconfont icon-maikefeng-jinyong1" wx:else/>
+            <text>静音</text>
+        </view>
+        <view class="menu-item power" bindtap="closeMeetingBtn">
+            <image class="power_icon" src="../../images/endMeetingWhite.png"/>
+            <text>退出</text>
+        </view>
+    </view>
+    <!--聊天窗口,PC端增加small样式-->
+    <view class="chat-dialog" wx:if="{{showChatDialog}}">
+        <view class="chat-header">
+            <text class="title">文字交谈</text>
+            <text class="iconfont icon-quxiao btn-close" bindtap="closeAllChat"/>
+        </view>
+        <scroll-view class="chatContent" scroll-y="{{true}}" id="chat" scroll-into-view="{{scrollId}}"
+                     scroll-anchoring="{{true}}"
+                     style="{{bangScreenInfo ? 'width: 100%;' : 'width: 100%;'}}">
+            <block wx:for="{{chatInfo.content}}" wx:key="index">
+                <view class="mine" wx:if="{{item.sendUserId === userId}}" id="goBottom{{index}}">
+                    <text class="text">{{item.content}}</text>
+                    <text class="name">我</text>
+                </view>
+                <view class="other" id="goBottom{{index}}" wx:else>
+                    <view>
+                        <text class="name">{{item.sendUserName}}</text>
+                        <text class="name-short" style="margin-right: 5px;overflow: hidden;">{{item.sendUserName}}
+                        </text>
+                    </view>
+                    <text class="text">{{item.content}}</text>
+                </view>
+            </block>
+        </scroll-view>
+        <!-- style=" position:absolute;bottom:{{ chatInputHeight}}rpx;background-color:{{chatInputBg}};"-->
+        <!-- bind:focus="chatInputPush" bind:blur="chatInputPull"-->
+        <view class="input-panel">
+            <input type="text"
+                   adjust-position="{{false}}"
+                   value="{{chatMsgContent}}"
+                   placeholder="请输入内容"
+                   confirm-type="send"
+                   bindconfirm="sendChatMsg"
+                   bindfocus="chatInputOnFocus"
+                   bindblur="chatInputOnBlur"
+                   style="bottom:{{chatInputBottom}}"
+            />
+        </view>
+    </view>
+    <!--新消息提示-->
+    <view class="new-msg-top" wx:if="{{showNewMsgTip}}" bindtap="openChatDialog">
+        <text class="head">{{chatInfo.content[chatInfo.content.length-1].sendUserName}}</text>
+        <view class="hoverTip-content">
+            <view class="hoverTip-content-name">{{chatInfo.content[chatInfo.content.length-1].sendUserName}}</view>
+            <view class="hoverTip-content-msg">{{chatInfo.content[chatInfo.content.length-1].content}}</view>
+        </view>
+        <view class="close" catchtap="closeNewMsgTip">
+            <van-icon name="cross"/>
+        </view>
+    </view>
+    <!--录像状态提示-->
+    <view class="record-panel" wx:if="{{meetingInfo.isVideoTap}}">
+        <image src="../../images/startRecord.png"/>
+        <text>录制中</text>
+    </view>
+    <!--提示用户查看笔录，并去签名-->
+    <sign-name id="sign-name" show="{{signNameDialog}}" recordParams="{{noteCheckParams}}"
+               bind:closeSignNameDialog="closeSignNameDialog"/>
+    <van-notify id="van-notify"/>
+    <view class="upload-toast" wx:if="{{showToast}}">
+        <view class="upload-toast-item" bindtap="toUploadFileView" data-type="camera">拍照</view>
+        <view class="upload-toast-item" bindtap="toUploadFileView" data-type="image">从相册选择</view>
+        <view class="upload-toast-item" bindtap="toUploadFileView" data-type="file">选择文件</view>
+        <view class="upload-toast-item" bindtap="hideChooseFileMenu">取消</view>
+    </view>
+    <wxs src="../../utils/meetingVertical.wxs" module="tools"/>
+
+</view>

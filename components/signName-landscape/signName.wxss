@@ -1,0 +1,178 @@
+/* 签名 */
+.noteCheck{
+  position: absolute;
+  top: 0;
+  /* left: 20%;
+  right: 20%; */
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 999;
+  background-color: #000000;
+}
+.noteCheckWordImgBox{
+  height: auto;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.noteCheckWordImg{
+  width: 100%;
+  height: auto;
+  border-bottom: 4rpx solid rgb(128, 128, 128);
+}
+.singlePageBox{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+}
+.singlePage{
+  display: block;
+  width: 95% !important;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.16);
+}
+.noteCheckBtnList{
+  position: fixed;
+  bottom: 50rpx;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: transparent;
+}
+.noteCheckBtn{
+  width: 330rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  color: #FFF;
+  font-size: 28rpx;
+  background-color: #226EED;
+}
+.noteCheckCancelBtn{
+  color: #FFF;
+  background-color: #CCCCCC;
+}
+.signatureBox{
+  display: flex;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: hidden;
+  z-index: 999;
+  background-color: #FFF;
+}
+.signature-title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5vw;
+  height: 100%;
+}
+.signature-menu{
+  width: 15vw;
+  height: 100%;
+  border-right: 1px solid #ccc;
+}
+.signature-drawing{
+  position: relative;
+  width: 80vw;
+  height: 100%;
+}
+.signatureMenu_icon{
+  display: flex;
+  flex-wrap: wrap;
+  height: 70%;
+}
+.icon-box{
+  width: 100%;
+  height: 20%;
+  margin-top: 150rpx;
+}
+.icon{
+  width: 66rpx;
+  height: 66rpx;
+  margin: 10rpx;
+  transform: rotate(90deg);
+}
+.signatureBtn{
+  height: 30%;
+}
+.signatureBtnList{
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  transform: rotate(90deg);
+}
+.signatureSubmitBtn{
+  width: 200rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  background-color: rgb(22, 150, 255);
+  font-size: 28rpx;
+  color: #fff;
+  margin: 10rpx;
+  margin-top: 50rpx;
+  font-weight: 500;
+}
+.signNameCancel{
+  width: 144rpx !important;
+  margin-bottom: 100rpx;
+  background-color: rgb(167, 167, 167) !important;
+}
+.mycanvas {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 9;
+  background-color: transparent;
+}
+.title>text{
+  display: block;
+  transform: rotate(90deg);
+}
+.data-name{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  top: 0%;
+}
+.data,.name{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 47%;
+  height: 90%;
+  border: 1px dashed #CCC;
+}
+.content{
+  transform: rotate(90deg);
+}
+.water_top{
+  position: fixed;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.water-text{
+  width: calc(100% / 2);
+  color: rgba(169,169,169,.2);
+  text-align: center;
+  font-size: 95%;
+  transform:rotate(-40deg);
+  margin: 30rpx 0;
+}

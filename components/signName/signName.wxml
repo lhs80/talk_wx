@@ -1,0 +1,56 @@
+<view class="noteCheck" wx:if="{{noteCheck}}">
+  <block>
+  <!-- 单页笔录效果 -->
+    <!-- <view class="singlePageBox" wx:if="{{noteCheckList.length === 1}}">
+      <image class="singlePage" style="width: 100%;" mode="widthFix" src="{{item}}?{{index}}?{{noteCheckListRandom}}" />
+    </view> -->
+    <!-- 多页笔录效果 -->
+    <!-- <view wx:else class="noteCheckWordImgBox" style="{{index >= 1 ? 'border-top: 7rpx solid rgb(128, 128, 128);' : ''}}">
+      <image class="noteCheckWordImg" mode="widthFix" src="{{item}}?{{index}}?{{noteCheckListRandom}}" />
+    </view> -->
+    <!-- 新的后端返回长图处理(兼容多图展示) -->
+    <view class="noteCheckWordImgBox">
+      <image class="noteCheckWordImg" wx:for="{{noteCheckList}}" wx:key="*this" mode="widthFix" src="{{item}}?{{index}}?{{noteCheckListRandom}}" />
+    </view>
+  </block>
+  <view class="noteCheckBtnList" wx:if="{{noteCheckBtn}}">
+    <button class="noteCheckBtn noteCheckCancelBtn" bindtap="noteCheckClose">取消确认</button>
+    <button class="noteCheckBtn" bindtap="noteCheckSubmit">确认笔录</button>
+  </view>
+  <view class="noteCheckBtnList" wx:if="{{noteSignBtn}}">
+    <button class="noteCheckBtn noteCheckCancelBtn" bindtap="noteSignClose">不同意</button>
+    <button class="noteCheckBtn" bindtap="noteSignSubmit">同意签名</button>
+  </view>
+</view>
+<view class="signatureBox" wx:if="{{userSignature}}">
+  <!-- 内容主题 -->
+  <view class="signature">
+    <!-- 绘图区域 -->
+    <view class="canvas">
+      <view class="signatureTitle">
+        请 在 屏 幕 指 定 区 域 签 名
+      </view>
+      <canvas class="mycanvas" canvas-id="canvas" bindtouchstart="canvasStart" bindtouchmove='canvasMove' bindtouchend='canvasEnd'></canvas>
+      <view class="explain">
+          请在此区域签上姓名
+      </view>
+      <view class="explain date">
+        请在此区域签上日期
+      </view>
+    </view>
+    <view class="signatureMenu">
+      <view class="signatureMenu_icon">
+        <view class="cancel" bindtap="brush">
+          <image class="icon" src="../../images/signPen.png" />
+        </view>
+        <view class="cancel" bindtap="clearCanvas">
+          <image class="icon" src="../../images/rubber.png" />
+        </view>
+      </view>
+      <view class="signatureBtn">
+        <button class="signatureSubmitBtn signNameCancel" bindtap="cancelSignature">取消</button>
+        <button class="signatureSubmitBtn" disabled="{{signNameBtn}}" bindtap="submitSignature">确认签名</button>
+      </view>
+    </view>
+  </view>
+</view>

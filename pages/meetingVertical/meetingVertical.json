@@ -1,0 +1,14 @@
+{
+  "usingComponents": {
+    "sign-name":"/components/verticalSignName/verticalSignName",
+    "van-notify": "@vant/weapp/notify/index"
+  },
+  "pageOrientation": "landscape",
+  "windows": {
+    "enablePullDownRefresh": false,
+    "disableScroll":true,
+    "navigationBarTitleText": "云视庭",
+    "navigationBarTextStyle": "black"
+  },
+  "disableScroll": true
+}

@@ -1,0 +1,76 @@
+<!--功能描述-->
+<!--1、以图片形式显示笔录内容-->
+<!--2、用户可以选择取消签名或同意签名-->
+<!--3、取消签名，弹窗关闭-->
+<!--4、同意签名时，会判断是手机端还是PC端-->
+<!--5、手机端时，显示签名面板-->
+<!--6、PC端时显示二维码-->
+<!--6、PC端时显示二维码-->
+<view>
+    <view class="sign-dialog" wx:if="{{showRecordDialog}}">
+        <!--水印-->
+        <view class="water-mark">
+            <view class="water-text" wx:for="{{30}}">【禁止翻拍及传播，违者将追究法律责任】{{meetingId}} {{live_push_name}}</view>
+        </view>
+        <!--笔录图片列表-->
+        <block class="record-image-list" wx:for="{{recordParams.recordImageList}}" wx:key="*this">
+            <image class="record-image-item" mode="widthFix" src="{{item}}"/>
+        </block>
+        <!-- 确认笔录，桌面版使用，桌面版已停止维护，暂时保留-->
+        <!--  <view class="noteCheckBtnList" wx:if="{{recordParams.type==='noteCheck'}}">-->
+        <!--    <button class="noteCheckBtn noteCheckCancelBtn" bindtap="noteCheckClose">取消确认</button>-->
+        <!--    <button class="noteCheckBtn" bindtap="noteCheckSubmit">确认笔录</button>-->
+        <!--  </view>-->
+        <!--按钮-->
+        <view class="record-btn-sign">
+            <button class="noteCheckCancelBtn" bindtap="closeRecordDialog">不同意</button>
+            <button bindtap="signConfirm">同意签名</button>
+        </view>
+    </view>
+    <!--手机端显示示签名面板-->
+    <view class="signatureBox" wx:if="{{showSignPanel}}">
+        <!-- 内容主题 -->
+        <view class="signature">
+            <!-- 头部 -->
+            <!-- <view class="header">
+              行声远科技签名系统
+            </view> -->
+            <!-- 绘图区域 -->
+            <!-- <image class="" src="{{src}}" wx:if="{{test}}"></image> -->
+            <view class="canvas" id="canvasBox">
+                <view class="signatureTitle">
+                    请 在 屏 幕 指 定 区 域 签 名
+                </view>
+                <canvas class="mycanvas" canvas-id="canvas" bindtouchstart="canvasStart" bindtouchmove='canvasMove'
+                        bindtouchend='canvasEnd'></canvas>
+                <view class="explain">
+                    请在此区域签上您的姓名
+                </view>
+                <view class="explain date">
+                    请在此区域签上日期
+                </view>
+            </view>
+            <view class="signatureMenu">
+                <view class="signatureMenu_icon">
+                    <view class="cancel" bindtap="brush">
+                        <image class="icon" src="../../images/signPen.png"/>
+                    </view>
+                    <view class="cancel" bindtap="clearCanvas">
+                        <image class="icon" src="../../images/rubber.png"/>
+                    </view>
+                </view>
+                <view class="signatureBtn">
+                    <button class="signatureSubmitBtn signNameCancel" bindtap="cancelSignature">取消签名</button>
+                    <button class="signatureSubmitBtn" disabled="{{signNameBtn}}" bindtap="submitSignature">确认签名
+                    </button>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!--PC端显示二维码，扫码签名-->
+    <view class="qrcode-wrapper" wx:if="{{QRCodeUrl}}">
+        <i class="iconfont icon-quxiao" bindtap="closeQRSignName"/>
+        <image src="{{QRCodeUrl}}"/>
+        <text>请扫描二维码，在手机上完成签名</text>
+    </view>
+</view>

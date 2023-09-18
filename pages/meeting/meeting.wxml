@@ -1,0 +1,149 @@
+<van-notify id="van-notify" />
+<sign-name id="sign-name" parms="{{noteCheckParms}}" bind:noteCheckSignName="noteCheckSignName" wx:if="{{noteAndSignName}}"></sign-name>
+<view class="meeting">
+  <van-nav-bar title="云视庭" custom-class="navTitle" bind:click-left="closeMeetingBtn">
+    <image class="endMeeting" src="../../images/endMeetting.png" slot="left" />
+  </van-nav-bar>
+  <swiper class="videoSwiper" indicator-dots="{{true}}" indicator-color="#999999" indicator-active-color="#FFFFFF" autoplay="{{false}}" circular="true">
+    <swiper-item style="position: absolute;width:100%;height:100%;top:0;left:0;">
+      <view class="{{activeScreen === 'viceScreen' ?  'viceScreen' : 'homeScreen'}}" bindtap="switchScreen" data-index="homeScreen">
+        <live-player wx:if="{{emceeUrl !== ''}}" src="{{emceeUrl}}" object-fit="contain" mode="RTC" sound-mode="{{soundMode}}" autoplay bindstatechange="play" binderror="error" class="live_push" />
+        <text class="emceeName" wx:if="{{emceeUrl !== ''}}">{{emceeName}}</text>
+        <view class="emceeLoading" wx:if="{{emceeUrl === ''}}">
+          <image style="width: 100%;height: 100%;" mode="widthFix" src="../../images/private_loading.png" />
+          <text class="emceeLoadingText">稍后法官将与您谈话，请耐心等待…</text>
+        </view>
+      </view>
+      <view class="{{activeScreen === 'viceScreen' ? 'homeScreen' : 'viceScreen'}} {{activeUser === userId ? 'activeUser' : ''}}" bindtap="switchScreen" data-index="{{activeUser === userId ? 'activeUser' : 'viceScreen'}}">
+        <live-pusher url="{{live_push}}" zoom="true" aspect='3:4' mode="RTC" object-fit="contain" device-position="{{devicePosition}}" autopush="true" enable-mic="{{enableMic}}" audio-volume-type="{{audioVolumeType}}" bindstatechange="statechange" class="live_push" />
+        <text class="userName">{{live_push_name}}</text>
+      </view>
+    </swiper-item>
+    <swiper-item style="position: absolute;width:100%;height:100%;top:0;left:0;" wx:for="{{live_pull}}" wx:key="id">
+      <view class="otherScreen">
+        <block wx:for="{{item}}" wx:key="id">
+          <view class="{{activeScreen === item.id ? 'activeScreen' : 'otherScreenList'}}" bindtap="switchScreen" data-index="{{item.id}}">
+            <view class="otherUserList">
+              <live-player src="{{item.url}}" bindnetstatus="playerInfo" object-fit="contain" mode="RTC" sound-mode="{{soundMode}}" autoplay bindstatechange="playother" binderror="error2" class="live_pull" />
+              <text class="userName">{{item.username}}</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    </swiper-item>
+  </swiper>
+  <view class="menuList">
+    <view class="menuItem" bindtap="voiceBtn">
+      <i class="iconfont icon-yangshengqi" wx:if="{{voiceShow}}"></i>
+      <i class="iconfont icon-tingtong" wx:else></i>
+      <text>{{voiceShow ? '扬声器' : '听筒'}}</text>
+    </view>
+    <view class="menuItem" bindtap="chatBody">
+      <i class="iconfont icon-liaotian">
+        <i class="chatNum" wx:if="{{chatNum > 0}}">{{chatNum}}</i>
+      </i>
+      <text>文字交谈</text>
+    </view>
+    <view class="menuItem" wx:if="{{isupload}}" bindtap="uploadImg">
+      <i class="iconfont icon-shangchuanwenjian"></i>
+      <text>上传材料</text>
+    </view>
+    <view class="menuItem" style="color:#8a8a8a;" wx:else>
+      <i class="iconfont icon-shangchuanwenjian"></i>
+      <text>上传材料</text>
+    </view>
+    <view class="menuItem" bindtap="getNote" wx:if="{{isGetNote}}">
+      <i class="iconfont icon-tanhuabilu"></i>
+      <text>笔录签名</text>
+    </view>
+    <view class="menuItem" style="color:#8a8a8a;" wx:else>
+      <i class="iconfont icon-tanhuabilu"></i>
+      <text>笔录签名</text>
+    </view>
+    <view class="menuItem" bindtap="more">
+      <i class="iconfont icon-gengduo"></i>
+      <text>更多</text>
+    </view>
+    <view class="more" wx:if="{{isMore}}">
+      <view class="moreTitle">
+        <text>更多</text>
+        <view bindtap="more">
+          <i class="iconfont icon-quxiao"></i>
+        </view>
+      </view>
+      <view class="moreList">
+        <view class="menuItem" bindtap="enableOrOpenMic">
+          <image src="../../icon/mic.svg" wx:if="{{enableMic}}" />
+          <image src="../../icon/enableMic.svg" wx:else />
+          <text>静音</text>
+        </view>
+        <view class="menuItem" wx:if="{{cameraBtn}}" bindtap="cameraBtn">
+          <image src="../../icon/camera.svg" />
+          <text>翻转镜头</text>
+        </view>
+        <view class="menuItem" wx:else>
+          <image src="../../icon/forbiddenCamera.svg" />
+          <text>翻转镜头</text>
+        </view>
+        <!-- <view class="menuItem" bindtap="addList">
+          <image src="../../icon/forbiddenCamera.svg" />
+          <text>测试添加</text>
+        </view> -->
+      </view>
+    </view>
+    <view class="hoverTip" wx:if="{{isChatMsg}}">
+      <van-row>
+        <van-col span="6" bindtap="chatBody">
+          <view class="headUserName van-ellipsis">{{chatMsgHoverTip.name}}</view>
+        </van-col>
+        <van-col span="16" bindtap="chatBody">
+          <view class="msgBody">
+            <text class="msgUserName">{{chatMsgHoverTip.name}}</text>
+            <view class="van-ellipsis msgContent">{{chatMsgHoverTip.msg}}</view>
+          </view>
+        </van-col>
+        <van-col span="2">
+          <view class="closeMsg" bindtap="getChatMsg">
+            <van-icon name="cross" />
+          </view>
+        </van-col>
+      </van-row>
+    </view>
+  </view>
+  <view class="chatBody" wx:if="{{chatBody}}">
+    <view class="moreTitle chatBodyTitle">
+      <text>文字交谈</text>
+      <view bindtap="chatBody">
+        <i class="iconfont icon-quxiao"></i>
+      </view>
+    </view>
+    <scroll-view class="chatMsgBody" scroll-y="{{true}}" id="chat" scroll-into-view="{{scrollId}}">
+      <block wx:for="{{chatMsgContentBody}}">
+        <view class="otherMsg" wx:if="{{item.sendUserId !== userId}}" id="goBottom{{index}}">
+          <text class="headUserName otherHead van-ellipsis" style="margin-right: 16rpx">
+            {{item.sendUserName}}
+          </text>
+          <view class="content">
+            <text class="msgUserName sendUserName">{{item.sendUserName}}</text>
+            <view class="msgContent chatContent">{{item.content}}</view>
+          </view>
+        </view>
+        <view class="meSendMsg" wx:if="{{item.sendUserId === userId}}" id="goBottom{{index}}">
+          <view class="msgContent meSendMsgContent">
+            <!-- <text class="msgUserName">{{item.name}}</text> -->
+            <!-- <text class="msgContent chatContent">{{item.content}}</text> -->
+            {{item.content}}
+          </view>
+          <text class="headUserName userNameBg">我</text>
+        </view>
+      </block>
+    </scroll-view>
+    <view class="sendMsg">
+      <input type="text" style="position: fixed;bottom:{{ chatInputHeight }}rpx;background-color:{{ chatInputBg }}" adjust-position="{{false}}" bind:focus="chatInputPush" bind:blur="chatInputPull" value="{{chatMsgContent}}" placeholder="请输入内容" confirm-type="send" bindconfirm="sendChatMsg" />
+    </view>
+  </view>
+  <view class="startRecord" wx:if="{{meetingRecordStatus}}">
+    <image src="../../images/startRecord.png" />
+    <text>录制中</text>
+  </view>
+</view>

@@ -1,0 +1,90 @@
+.QR {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(114deg, #ECF6FB 0%, #F9FCFF 52%, #F1F7FF 100%);
+}
+
+view {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.QR-logo-box {
+  margin-top: -50px;
+}
+
+.QR-img {
+  margin-top: 30px;
+}
+
+image {
+  display: block;
+}
+
+.QR-logo {
+  width: 121px;
+  height: 146px
+}
+
+.QR-img {
+  width: 250px;
+  height: 250px;
+}
+
+.QR-success {
+  width: 120px;
+  height: 120px;
+}
+
+.text {
+  font-size: 20px;
+  font-family: SourceHanSansCN-Medium, SourceHanSansCN;
+  font-weight: 500;
+  color: #666666;
+  line-height: 30px;
+  margin-top: 13px;
+}
+
+.weixin-text {
+  color: #051C33;
+  margin: 0px 5px;
+}
+
+.verify-info {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 30px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 600;
+  color: #051C33;
+  line-height: 42px;
+}
+
+button {
+  width: 240px;
+  height: 50px;
+  background: #148AFE;
+  border-radius: 2px;
+  border-style: none;
+  color: #FFF;
+  font-size: 20px;
+}
+
+@media screen and (min-width: 1920px) {
+  .QR-logo-box {
+    margin-top: -250px;
+  }
+
+  .QR-img {
+    margin-top: 50px;
+  }
+
+  .QR-success {
+    margin-top: 150px;
+  }
+}

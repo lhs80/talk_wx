@@ -1,0 +1,35 @@
+<van-notify id="van-notify" />
+<van-dialog id="van-dialog" />
+<van-toast id="van-toast" />
+<view class="login">
+  <image class="background" src="../../images/background.png" mode="aspectFill" />
+  <view class="login_from">
+    <view class="logo">
+      <image class="logoImg" src="{{logo_img}}" mode="aspectFill" />
+      <view class="title">{{appName}}</view>
+    </view>
+    <view class="form">
+      <view class="id">
+        <label for="meetingId">
+          <text>*</text>
+          谈话
+        </label>
+        <input id="meetingId" class="login_input" bindinput="getInputId" type="text" auto-focus="true" value="{{ talk_id }}" placeholder="请输入谈话ID" />
+      </view>
+      <view class="name">
+        <label for="userName">
+          <text>*</text>
+          姓名
+        </label>
+        <input id="userName" class="login_input" bindinput="getInputName" type="text" value="{{ username }}" placeholder="请输入您的真实姓名" maxlength="14" />
+      </view>
+      <view class="bottom">
+        <view class="warn_msg">您在此填写的信息仅用于本次谈话的身份核验及登录，本小程序不会以任何形式存储您的信息</view>
+        <button class="submitBtn" disabled="{{loginBtn}}" bindtap="loginTalk" style="position: relative; left: 0rpx; top: 28rpx">
+          我已同意并登录
+        </button>
+      </view>
+    </view>
+  </view>
+  <view class="copy">{{copyright}}</view>
+</view>

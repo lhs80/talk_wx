@@ -1,0 +1,40 @@
+<van-notify id="van-notify" />
+<van-dialog id="van-dialog" />
+<van-toast id="van-toast" />
+<view class="login" style="background:{{logo_img}}">
+  <view class="login_from">
+    <view class="logo">
+      <van-image width="6rem" height="6rem" fit="cover" round src="{{logo_img}}" />
+      <view class="title">
+        {{appName}}
+      </view>
+    </view>
+    <van-cell-group class="van-hairline--surround">
+      <van-field input-class="login_input"
+                 type="number"
+                 center="true"
+                 required="true"
+                 label-class="login_input_label"
+                 label="谈话ID"
+                 placeholder="请输入谈话ID"
+                 model:value="{{talk_id}}"
+      />
+      <van-field input-class="login_input"
+                 bind:change="getInputName"
+                 center="true"
+                 required="true"
+                 label-class="login_input_label"
+                 value="{{ username }}" label="姓名"
+                 placeholder="请输入您的真实姓名"
+                 error-message="{{ name_error }}"
+                 maxlength="14" />
+    </van-cell-group>
+    <view class="warn_msg">您在此填写的信息仅用于本次谈话的身份核验及登录，本小程序不会以任何形式存储您的信息</view>
+    <van-button custom-class="submitBtn" disabled="{{loginBtn}}" type="info" block bind:click="loginTalk">
+      我已同意并登录
+    </van-button>
+    <view class="copy">
+      {{copyright}}
+    </view>
+  </view>
+</view>
